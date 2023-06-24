@@ -23,6 +23,6 @@ Route::controller(StudentController::class)->group(function(){
 
     Route::get('/','index');
     Route::post('post','store');
-    Route::post('show','show');
+    Route::get('show/{first}/{last}','show');
 
 });
