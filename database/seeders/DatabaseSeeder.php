@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +13,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $faker = Faker::create();
+        for ($i = 1; $i <= 4; $i++) {
+            $name = $faker->firstName;
+            $last_name = $faker->lastName;
+            $jenis = ['kuis', 'tugas', 'absensi', 'praktek', 'uas'];
+            foreach($jenis as $item){
+                $nilai = $faker->numberBetween(0, 100);
+                \DB::table('students')->insert([
+                    'name' => $name,
+                    'last_name' => $last_name,
+                    'jenis' =>$item,
+                    'nilai' => $nilai,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
     }
 }
