@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -140,5 +141,13 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    public function list() : View {
+        $students = Student::getListStudents();
+        
+        return view('display', [
+            'students'  => $students
+        ]);
     }
 }
