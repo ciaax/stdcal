@@ -4,9 +4,10 @@
     <title>Input Mahasiswa</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">   
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <style>
 .form-section{
@@ -44,36 +45,28 @@
                 </nav>
 
                <h1 class="text-info text-center mt-3 mb-4">Lihat Nilai Mahasiswa</h1>
-
-                        <div class="nav nav-fill my-2">
-                          <label class="nav-link shadow-sm step0 border ml-2 ">Step One</label>
-                          <label class="nav-link shadow-sm step1 border ml-2 " >Step Two</label>
-                        </div>
-          
-                <form action="/show" method="post" class="employee-form">
-                 @csrf
-                <div class="form-section">
-                    <label for="">Name:</label>
-                    <input type="text" class="form-control mb-3" name="name" required>
-                    <label for="">Last Name:</label>
-                    <input type="text" class="form-control mb-3" name="last_name" required>
-                </div>
-                <div class="form-section">
-                    <input type="radio" name="jenis" value="kuis" checked> Kuis<br>
-                    <input type="radio" name="jenis" value="tugas"> Tugas<br>
-                    <input type="radio" name="jenis" value="absensi"> Absensi<br>
-                    <input type="radio" name="jenis" value="praktek"> Praktek<br>
-                    <input type="radio" name="jenis" value="uas"> UAS<br>
-                    <input type="radio" name="jenis" value="uas"> semua<br>
-                    <!--<span style="color: blue">@error('nilai'){{$message}}@enderror</span><br>--> 
-                </div>
-              <div class="form-navigation mt-3">
-                 <button type="button" class="previous btn btn-info float-left">&lt; Previous</button>
-                 <button type="button" class="next btn btn-info float-right">Next &gt;</button>
-                 <button type="submit" class="btn btn-success float-right">Submit</button>
-              </div>
-
-            </form>
+               <table id="myTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($students as $key => $student)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $student->name }}</td>
+                                <td>{{ $student->last_name }}</td>
+                                <td>
+                                    <a href="{{ route('details', [$student->name, $student->last_name]) }}">View</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
         </div>
             
         </div>
@@ -81,6 +74,10 @@
     </div>
 
     <script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    });
+
     $(function(){
         var $sections=$('.form-section');
         function navigateTo(index){

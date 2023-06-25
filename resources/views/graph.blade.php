@@ -36,7 +36,7 @@
                         <a class="nav-link" href="/">Input Data</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="display">Lihat Data</a>
+                        <a class="nav-link" href="{{ route('display') }}">Lihat Data</a>
                         </li>
                     </ul>
                     </div>
@@ -89,13 +89,13 @@
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
+                        'rgba(255, 78, 78, 0.8)'
                     ],
                     borderColor: [
                         'rgba(75, 192, 192, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
+                        'rgba(255, 78, 78, 1)'
                     ],
                     borderWidth: 1
                 }]

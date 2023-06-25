@@ -14,15 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/display', function () {
-     return view('display');
- });
-
 // route in laravel 9
 Route::controller(StudentController::class)->group(function(){
 
     Route::get('/','index');
     Route::post('post','store');
-    Route::get('show/{first}/{last}','show');
+    Route::get('show/{first}/{last}','show')->name('details');
+    Route::get('display', 'list')->name('display');
 
 });
